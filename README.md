@@ -47,3 +47,12 @@ var inumberFloat = new INumber.default("#inumber-float", {
 
 ### Methods
 ```inumber.setValue(2);``` - set value
+
+### Generating layout
+```
+<div id="inumber" class="inumber">
+  <button type="button" class="inumber-button decrease">
+  <input type="number" class="inumber-input"/>
+  <button type="button" class="inumber-button increase">
+</div>
+```
