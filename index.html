@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,7 +31,7 @@
       }
 
       .button {
-        background-color: rgba(255,255,255,0);
+        background-color: rgba(255, 255, 255, 0);
         padding: 0.5em;
         border: 1px solid #eee;
         cursor: pointer;
@@ -80,22 +79,20 @@
         text-align: center;
       }
     </style>
-
   </head>
 
   <body>
     <div style="text-align: center; margin-bottom: 2em;">
       <h1>INumber Demo</h1>
       <p>Simple and easy Input Spinner</p>
-      <p style="margin-top: 1em;">[ <a href="">GitHub</a> ]</p>
+      <p style="margin-top: 1em;">
+        [ <a href="https://github.com/rainjeck/inumber">GitHub</a> ]
+      </p>
     </div>
 
     <div class="container">
-
       <div class="row">
-        <div id="inumber">
-          <input type="text"/>
-        </div>
+        <div id="inumber"><input type="text" /></div>
       </div>
 
       <div class="row">
@@ -131,7 +128,9 @@
   &lt;/div&gt;
           </code>
           </pre>
-          <div class="title" style="text-decoration: underline;">JavaScript:</div>
+          <div class="title" style="text-decoration: underline;">
+            JavaScript:
+          </div>
           <pre>
           <code>
   var inumber = new INumber.default("#inumber", {
@@ -149,7 +148,9 @@
   inumber.setValue(2);
           </code>
           </pre>
-          <div class="title" style="text-decoration: underline;">CSS Classes and generating layout:</div>
+          <div class="title" style="text-decoration: underline;">
+            CSS Classes and generating layout:
+          </div>
           <pre>
           <code>
   &lt;div id="inumber" class="inumber"&gt;
@@ -161,18 +162,15 @@
           </pre>
         </div>
       </div>
-
-
     </div>
 
     <script src="dest/inumber.js"></script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-
         var inumber = new INumber.default("#inumber", {
           change: function(value, formatValue, el, id) {
-            console.log('value', value, 'formatValue', formatValue);
+            console.log("value", value, "formatValue", formatValue);
           }
         });
 
@@ -186,11 +184,10 @@
           float: true,
           decimals: 2,
           change: function(value, formatValue, el, id) {
-            console.log('value', value, 'formatValue', formatValue);
+            console.log("value", value, "formatValue", formatValue);
           }
         });
       });
     </script>
-
   </body>
 </html>
