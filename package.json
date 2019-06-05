@@ -1,0 +1,28 @@
+{
+  "name": "jstabs",
+  "version": "1.0.0",
+  "description": "Input Spinner",
+  "author": "Tishuk Nadezda",
+  "homepage": "https://github.com/rainjeck/jstabs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rainjeck/jstabs"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-modules-umd": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "gulp": "^4.0.1",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-css": "^0.1.0",
+    "gulp-jsmin": "^0.1.5",
+    "gulp-livereload": "^4.0.1",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-rename": "^1.4.0",
+    "http": "^0.0.0",
+    "st": "^1.2.2"
+  }
+}
