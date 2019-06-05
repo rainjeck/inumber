@@ -47,6 +47,10 @@
         margin-bottom: 1em;
       }
 
+      pre {
+        white-space: pre-wrap;
+      }
+
       .code {
         background-color: #eee;
         text-align: left;
@@ -90,7 +94,7 @@
 
       <div class="row">
         <div id="inumber">
-          <input type="number"/>
+          <input type="text"/>
         </div>
       </div>
 
@@ -100,7 +104,7 @@
 
       <div class="row">
         <div id="inumber-float">
-          <input type="text" step="0.1" value="1.2" />
+          <input type="text" step="0.1" value="1.2" min="0.1" max="1.5" />
         </div>
       </div>
 
@@ -119,11 +123,11 @@
           <pre>
           <code>
   &lt;div id="inumber"&gt;
-    &lt;input type="number" min="1" max="10" step="1" value="2"/&gt;
+    &lt;input type="text" min="1" max="10" step="1" value="2"/&gt;
   &lt;/div&gt;
 
   &lt;div id="inumber-float"&gt;
-    &lt;input type="text" step="0.1" value="1.2"/&gt;
+    &lt;input type="text" step="0.1" value="1.2" min="0.1" max="1.5"/&gt;
   &lt;/div&gt;
           </code>
           </pre>

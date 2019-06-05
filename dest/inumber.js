@@ -47,32 +47,29 @@
       this.el = el;
       this.input = input;
       this.locale = params.locale || navigator.language || "en-US";
-      this.decreaseText = params && params.decreaseText ? params.decreaseText : '-';
-      this.increaseText = params && params.increaseText ? params.increaseText : '+';
-      this["float"] = params && params["float"] && typeof params["float"] === 'boolean' ? params["float"] : false;
+      this.decreaseText = params.decreaseText || '-';
+      this.increaseText = params.increaseText || '+';
+      this["float"] = params["float"] || false;
       this.className = 'inumber';
-
-      if (params && this.checkParam('inputPosition', params.inputPosition)) {
-        this.inputPosition = params.inputPosition;
-      } else {
-        this.inputPosition = 'between';
-      }
-
+      this.inputPosition = params.inputPosition || "between";
       var min = input.getAttribute("min");
       var max = input.getAttribute("max");
       var step = input.getAttribute("step");
-      this.value = input.value ? parseFloat(input.value) : 0;
-      this.formatValue = input.value ? this.formatNumber(input.value) : 0;
+      this.value = input.value || 0;
+      this.formatValue = parseInt(input.value) || 0;
       this.min = min ? Math.abs(min) : 0;
       this.max = max ? Math.abs(max) : 0;
       this.step = step ? Math.abs(step) : 1;
 
       if (this["float"]) {
+        this.value = parseFloat(input.value) || 0;
         this.step = parseFloat(this.step);
-        this.decimals = params && params.decimals ? parseInt(params.decimals) : 1;
+        this.decimals = parseInt(params.decimals) || 1;
+        this.formatValue = this.formatNumber(this.value) || 0;
       } else {
         this.step = Math.ceil(this.step);
         this.value = parseInt(this.value);
+        this.formatValue = this.formatNumber(this.value);
       }
 
       this.setValue(this.value);
@@ -100,8 +97,8 @@
         }
       };
 
-      input.onkeyup = function (e) {
-        _this.keyup(e);
+      input.onblur = function (e) {
+        _this.change(e);
 
         if (params && typeof params.change === "function") {
           params.change(_this.value, _this.formatValue, _this.el, id);
@@ -144,19 +141,6 @@
         };
       }
     }, {
-      key: "checkParam",
-      value: function checkParam(param, value) {
-        if (param == 'inputPosition') {
-          var position = ['left', 'between', 'right'];
-
-          if (position.indexOf(value) >= 0) {
-            return true;
-          }
-
-          return false;
-        }
-      }
-    }, {
       key: "formatNumber",
       value: function formatNumber(value) {
         var decimals = this.decimals;
@@ -170,6 +154,14 @@
     }, {
       key: "setValue",
       value: function setValue(value) {
+        if (typeof value === 'NaN') {
+          this.value = value = 0;
+        }
+
+        if (value == "") {
+          this.value = value = 0;
+        }
+
         if (this.min >= 0 && value < this.min) {
           value = this.min;
         }
@@ -178,16 +170,12 @@
           value = this.max;
         }
 
-        if (value == "") {
-          value = 0;
-        }
-
         if (this["float"]) {
           this.value = +parseFloat(value).toFixed(this.decimals);
           this.formatValue = this.formatNumber(value);
         } else {
           this.value = parseInt(value);
-          this.formatValue = this.formatNumber(value);
+          this.formatValue = this.formatNumber(this.value);
         }
 
         this.input.value = this.formatValue;
@@ -205,15 +193,13 @@
         this.setValue(value);
       }
     }, {
-      key: "keyup",
-      value: function keyup(e) {
-        var key = parseInt(e.which);
-
-        if (key != 8 && key != 0 && (key < 48 || key > 57) && (key < 96 || key > 105)) {
-          return;
-        }
-
-        this.setValue(e.currentTarget.value);
+      key: "change",
+      value: function change(e) {
+        var value = e.currentTarget.value;
+        value = value.replace(/[a-zA-Zа-яА-Я]/g, "");
+        value = value.replace(/[\s*]/g, "");
+        value = value.replace(/[,*]/g, ".");
+        this.setValue(value);
       }
     }]);
 
@@ -222,3 +208,4 @@
 
   _exports["default"] = INumber;
 });
+//# sourceMappingURL=../dest/inumber.js.map

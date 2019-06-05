@@ -9,6 +9,7 @@ gulp.task("js", function() {
 	return (
     gulp
       .src( ["src/INumber.js"] )
+      .pipe(plugin.sourcemaps.init())
       .pipe(
         plugin.babel(
           {
@@ -22,6 +23,7 @@ gulp.task("js", function() {
         )
       )
       .pipe( plugin.rename({basename: pluginName}) )
+      .pipe(plugin.sourcemaps.write("../dest"))
       .pipe( gulp.dest("dest/") )
       .pipe( plugin.livereload() )
   );

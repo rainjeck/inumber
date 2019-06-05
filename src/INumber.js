@@ -22,37 +22,40 @@ export default class INumber {
 
     this.locale = params.locale || navigator.language || "en-US";
 
-    this.decreaseText = (params && params.decreaseText) ? params.decreaseText : '-';
-    this.increaseText = (params && params.increaseText) ? params.increaseText : '+';
+    this.decreaseText = params.decreaseText || '-';
+    this.increaseText = params.increaseText || '+';
 
-    this.float = (params && params.float && typeof params.float === 'boolean') ? params.float : false;
+    this.float = params.float || false;
 
     this.className = 'inumber';
 
-    if (params && this.checkParam('inputPosition', params.inputPosition)) {
-      this.inputPosition = params.inputPosition;
-    } else {
-      this.inputPosition = 'between';
-    }
+    this.inputPosition = params.inputPosition || "between";
 
     const min = input.getAttribute("min");
     const max = input.getAttribute("max");
     const step = input.getAttribute("step");
 
-    this.value = (input.value) ? parseFloat(input.value) : 0;
+    this.value = input.value || 0;
 
-    this.formatValue = (input.value) ? this.formatNumber(input.value) : 0;
+    this.formatValue = parseInt(input.value) || 0;
 
     this.min = (min) ? Math.abs(min) : 0;
     this.max = (max) ? Math.abs(max) : 0;
     this.step = (step) ? Math.abs(step) : 1;
 
     if (this.float) {
+
+      this.value = parseFloat(input.value) || 0;
       this.step = parseFloat(this.step);
-      this.decimals = (params && params.decimals) ? parseInt(params.decimals) : 1;
+      this.decimals = parseInt(params.decimals) || 1;
+      this.formatValue = this.formatNumber(this.value) || 0;
+
     } else {
+
       this.step = Math.ceil(this.step);
       this.value = parseInt(this.value);
+      this.formatValue = this.formatNumber(this.value);
+
     }
 
     this.setValue( this.value );
@@ -82,13 +85,13 @@ export default class INumber {
       }
     }
 
-    input.onkeyup = (e) => {
-      this.keyup(e);
+    input.onblur = (e) => {
+      this.change(e);
 
       if (params && typeof params.change === "function") {
         params.change(this.value, this.formatValue, this.el, id);
       }
-    };
+    }
   }
 
   render() {
@@ -126,19 +129,6 @@ export default class INumber {
     return {decrease: btnDecrease, increase: btnIncrease};
   }
 
-  checkParam(param, value) {
-    if (param == 'inputPosition') {
-
-      const position = ['left', 'between', 'right'];
-
-      if (position.indexOf(value) >= 0) {
-        return true;
-      }
-
-      return false;
-    }
-  }
-
   formatNumber(value) {
     const decimals = this.decimals;
 
@@ -154,6 +144,14 @@ export default class INumber {
 
   setValue(value) {
 
+    if (typeof value === 'NaN') {
+      this.value = value = 0;
+    }
+
+    if (value == "") {
+      this.value = value = 0;
+    }
+
     if (this.min >= 0 && value < this.min) {
       value = this.min;
     }
@@ -162,16 +160,16 @@ export default class INumber {
       value = this.max;
     }
 
-    if (value == "") {
-      value = 0;
-    }
-
     if (this.float) {
+
       this.value = +parseFloat(value).toFixed(this.decimals);
       this.formatValue = this.formatNumber(value);
+
     } else {
+
       this.value = parseInt(value);
-      this.formatValue = this.formatNumber(value);
+      this.formatValue = this.formatNumber(this.value);
+
     }
 
     this.input.value = this.formatValue;
@@ -187,13 +185,14 @@ export default class INumber {
     this.setValue(value);
   }
 
-  keyup(e) {
-    const key = parseInt(e.which);
+  change(e) {
 
-    if (key != 8 && key != 0 && (key < 48 || key > 57) && (key < 96 || key > 105)) {
-      return;
-    }
+    let value = e.currentTarget.value;
 
-    this.setValue(e.currentTarget.value);
+    value = value.replace(/[a-zA-Zа-яА-Я]/g, "");
+    value = value.replace(/[\s*]/g, "");
+    value = value.replace(/[,*]/g, ".");
+
+    this.setValue(value);
   }
 }
