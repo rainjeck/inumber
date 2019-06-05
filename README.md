@@ -12,7 +12,7 @@ Include ```inumber.min.css``` and ```inumber.min.js```.
 ## Layout
 ```
 <div id="inumber">
-  <input type="number"/>
+  <input type="text"/>
 </div>
 ```
 Float Input:
