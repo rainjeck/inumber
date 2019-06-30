@@ -14,7 +14,16 @@ export default class INumber {
       return;
     }
 
-    const el = document.querySelector(id);
+    let el;
+
+    if (typeof id === 'object') {
+      el = id;
+    }
+
+    if (typeof id === 'string') {
+      el = document.querySelector(id);
+    }
+
     const input = el.querySelector("input");
 
     this.el = el;
@@ -58,7 +67,7 @@ export default class INumber {
 
     }
 
-    this.setValue( this.value );
+    this.setValue(this.value);
 
     const controls = this.render();
 
@@ -126,7 +135,10 @@ export default class INumber {
       this.el.insertBefore(btnIncrease, null);
     }
 
-    return {decrease: btnDecrease, increase: btnIncrease};
+    return {
+      decrease: btnDecrease,
+      increase: btnIncrease
+    };
   }
 
   formatNumber(value) {

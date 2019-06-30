@@ -168,7 +168,8 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-        var inumber = new INumber.default("#inumber", {
+        var elem = document.querySelector("#inumber");
+        var inumber = new INumber.default(elem, {
           change: function(value, formatValue, el, id) {
             console.log("value", value, "formatValue", formatValue);
           }
