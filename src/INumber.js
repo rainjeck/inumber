@@ -7,12 +7,14 @@
 
 export default class INumber {
 
-  constructor(id, params) {
+  constructor(id, opts) {
 
     if (!id) {
       console.error("INumber: Element not set");
       return;
     }
+
+    let params = opts || {};
 
     let el;
 

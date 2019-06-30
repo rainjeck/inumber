@@ -34,7 +34,7 @@
   var INumber =
   /*#__PURE__*/
   function () {
-    function INumber(id, params) {
+    function INumber(id, opts) {
       var _this = this;
 
       _classCallCheck(this, INumber);
@@ -44,6 +44,7 @@
         return;
       }
 
+      var params = opts || {};
       var el;
 
       if (_typeof(id) === 'object') {
