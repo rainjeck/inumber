@@ -1,8 +1,3 @@
-/**
- * Author and copyright: Tishuk Nadezda (https://github.com/rainjeck)
- * Repository: https://github.com/rainjeck/inumber
- * License: MIT, see file 'LICENSE'
- */
 'use strict';
 
 export default class INumber {
@@ -114,10 +109,10 @@ export default class INumber {
     const btnIncrease = document.createElement("button");
 
     btnDecrease.setAttribute("type", "button");
-    btnDecrease.setAttribute("class", `${this.className}-button decrease`);
+    btnDecrease.setAttribute("class", `${this.className}-button is-decrease`);
 
     btnIncrease.setAttribute("type", "button");
-    btnIncrease.setAttribute("class", `${this.className}-button increase`);
+    btnIncrease.setAttribute("class", `${this.className}-button is-increase`);
 
     btnDecrease.innerHTML = this.decreaseText;
     btnIncrease.innerHTML = this.increaseText;

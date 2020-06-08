@@ -1,3 +1,10 @@
+/**
+ * License: MIT
+ * Description: Simple and easy Input Spinner
+ * Author: Tishuk Nadezda
+ * Homepage: https://rainjeck.github.io/inumber/
+ */
+
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
     define(["exports"], factory);
@@ -10,12 +17,7 @@
     factory(mod.exports);
     global.INumber = mod.exports;
   }
-})(this, function (_exports) {
-  /**
-   * Author and copyright: Tishuk Nadezda (https://github.com/rainjeck)
-   * Repository: https://github.com/rainjeck/inumber
-   * License: MIT, see file 'LICENSE'
-   */
+})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_exports) {
   'use strict';
 
   Object.defineProperty(_exports, "__esModule", {
@@ -23,7 +25,7 @@
   });
   _exports["default"] = void 0;
 
-  function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+  function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -31,9 +33,7 @@
 
   function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-  var INumber =
-  /*#__PURE__*/
-  function () {
+  var INumber = /*#__PURE__*/function () {
     function INumber(id, opts) {
       var _this = this;
 
@@ -126,9 +126,9 @@
         var btnDecrease = document.createElement("button");
         var btnIncrease = document.createElement("button");
         btnDecrease.setAttribute("type", "button");
-        btnDecrease.setAttribute("class", "".concat(this.className, "-button decrease"));
+        btnDecrease.setAttribute("class", "".concat(this.className, "-button is-decrease"));
         btnIncrease.setAttribute("type", "button");
-        btnIncrease.setAttribute("class", "".concat(this.className, "-button increase"));
+        btnIncrease.setAttribute("class", "".concat(this.className, "-button is-increase"));
         btnDecrease.innerHTML = this.decreaseText;
         btnIncrease.innerHTML = this.increaseText;
 

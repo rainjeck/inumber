@@ -1,194 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru-RU">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
-    <title>INumber Demo - Simple and easy Input Spinner</title>
-
-    <link rel="stylesheet" href="dest/inumber.min.css" />
-
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-      }
-      body {
-        padding: 2em;
-      }
-
-      .container {
-        max-width: 640px;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .row {
-        margin-bottom: 1em;
-      }
-
-      .button {
-        background-color: rgba(255, 255, 255, 0);
-        padding: 0.5em;
-        border: 1px solid #eee;
-        cursor: pointer;
-        outline: 0;
-      }
-
-      .button:hover {
-        border-color: #ccc;
-      }
-
-      .title {
-        margin-bottom: 1em;
-      }
-
-      pre {
-        white-space: pre-wrap;
-      }
-
-      .code {
-        background-color: #eee;
-        text-align: left;
-        padding: 1em;
-        border-radius: 5px;
-      }
-
-      .code span {
-        color: #999;
-      }
-
-      .inumber-button {
-        width: 30px;
-        height: 30px;
-        border: 1px solid #eee;
-      }
-
-      .inumber-button:hover {
-        border-color: #ccc;
-      }
-
-      .inumber-input {
-        width: 50px;
-        height: 30px;
-        border-top: 1px solid #eee;
-        border-bottom: 1px solid #eee;
-        text-align: center;
-      }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="author" content="//vk.com/tishukn">
+    <link rel="stylesheet" href="demo/prism.css">
+    <link rel="stylesheet" type="text/css" href="demo/style.css">
+    <meta name="description" content="Simple and easy Input Spinner">
+    <title>INumber Demo</title>
   </head>
-
-  <body>
-    <div style="text-align: center; margin-bottom: 2em;">
-      <h1>INumber Demo</h1>
-      <p>Simple and easy Input Spinner</p>
-      <p style="margin-top: 1em;">
-        [ <a href="https://github.com/rainjeck/inumber">GitHub</a> ]
-      </p>
-    </div>
-
+  <body><!--[if lte IE 9]>
+    <p class="browsehappy">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="//browsehappy.com/" target="_blank">обновите ваш браузер</a> чтобы воспользоваться всем функционалом сайта.</p><![endif]-->
     <div class="container">
-      <div class="row">
-        <div id="inumber"><input type="text" /></div>
+      <div class="header text-center">
+        <div class="row">
+          <h1>INumber Demo</h1>
+          <p>Simple and easy Input Spinner</p>
+        </div>
+        <p><a href="https://github.com/rainjeck/inumber">GitHub</a></p>
       </div>
-
-      <div class="row">
-        <button type="button" class="button" id="setValue">Set Value 2</button>
-      </div>
-
-      <div class="row">
-        <div id="inumber-float">
-          <input type="text" step="0.1" value="1.2" min="0.1" max="1.5" />
+      <div class="block text-center">
+        <div class="row">
+          <div id="inumber">
+            <input type="text">
+          </div>
+        </div>
+        <div class="row">
+          <button class="button" id="setValue" type="button">Set Value 2</button>
+        </div>
+        <div class="row">
+          <div id="inumber-float">
+            <input type="text" step="0.1" value="1.2" min="0.1" max="1.5">
+          </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="code">
-          <div class="title"><strong>Usage:</strong></div>
-          <div class="title" style="text-decoration: underline;">HTML:</div>
-          <pre>
-          <code>
-  &lt;div id="inumber"&gt;
-    &lt;input type="number"/&gt;
-  &lt;/div&gt;
-          </code>
-          </pre>
-          <p>You can use attributes:</p>
-          <pre>
-          <code>
-  &lt;div id="inumber"&gt;
-    &lt;input type="text" min="1" max="10" step="1" value="2"/&gt;
-  &lt;/div&gt;
-
-  &lt;div id="inumber-float"&gt;
-    &lt;input type="text" step="0.1" value="1.2" min="0.1" max="1.5"/&gt;
-  &lt;/div&gt;
-          </code>
-          </pre>
-          <div class="title" style="text-decoration: underline;">
-            JavaScript:
-          </div>
-          <pre>
-          <code>
-  var inumber = new INumber.default("#inumber", {
-    decreaseText: "-",
-    increaseText: "+",
-    float: false,
-    decimals: 0,
-    locale: '', <span>// navigator.language as default or <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation" target="_blank">Intl</a></span>
-    inputPosition: "between", <span>// between, left, right</span>
-    init: function(instance) {},
-    change: function(value, formatValue, el, id) {}
-  });
-
-  // Method:
-  inumber.setValue(2);
-          </code>
-          </pre>
-          <div class="title" style="text-decoration: underline;">
-            CSS Classes and generating layout:
-          </div>
-          <pre>
-          <code>
-  &lt;div id="inumber" class="inumber"&gt;
-    &lt;button type="button" class="inumber-button decrease"&gt;
-    &lt;input type="number" class="inumber-input"/&gt;
-    &lt;button type="button" class="inumber-button increase"&gt;
-  &lt;/div&gt;
-          </code>
-          </pre>
+      <div class="block">
+        <div class="row">
+          <h3 class="title"><strong>Usage:</strong></h3>
+          <div class="title">HTML:</div>
         </div>
+        <div class="row">
+          <pre class="language-markup"><code>&lt;div id='inumber'&gt;
+  &lt;input type='number' /&gt;
+&lt;/div&gt;
+</code></pre>
+        </div>
+      </div>
+      <div class="block">
+        <p>You can use attributes:</p>
+        <pre class="language-markup"><code>&lt;div id='inumber'&gt;
+  &lt;input type='text' min='1' max='10' step='1' value='2' /&gt;
+&lt;/div&gt;
+
+&lt;div id='inumber-float'&gt;
+  &lt;input type='text' step='0.1' value='1.2' min='0.1' max='1.5' /&gt;
+&lt;/div&gt;
+</code></pre>
+      </div>
+      <div class="block">
+        <div class="title">JavaScript:</div>
+        <pre class="language-javascript"><code>var inumber = new INumber.default("#inumber", {
+  decreaseText: '-',
+  increaseText: '+',
+  float: false,
+  decimals: 0,
+  locale: '', // navigator.language as default or Intl
+  inputPosition: "between", <span>// between, left, right</span>
+  init: function(instance) { ... },
+  change: function(value, formatValue, el, id) { ... }
+});
+
+// Method:
+inumber.setValue(2);
+</code></pre>
+      </div>
+      <div class="block">
+        <div class="title">CSS Classes and generating layout:</div>
+        <pre class="language-markup"><code>&lt;div id='inumber' class='inumber'&gt;
+  &lt;button type='button' class='inumber-button is-decrease'&gt;-&lt;/button
+  &lt;input type='number' class='inumber-input' /&gt;
+  &lt;button type='button' class='inumber-button is-increase'&gt;+&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
       </div>
     </div>
-
-    <script src="dest/inumber.js"></script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        var elem = document.querySelector("#inumber");
-        var inumber = new INumber.default(elem, {
-          change: function(value, formatValue, el, id) {
-            console.log("value", value, "formatValue", formatValue);
-          }
-        });
-
-        var btn = document.querySelector("#setValue");
-
-        btn.addEventListener("click", function() {
-          inumber.setValue(2);
-        });
-
-        var inumberFloat = new INumber.default("#inumber-float", {
-          float: true,
-          decimals: 2,
-          change: function(value, formatValue, el, id) {
-            console.log("value", value, "formatValue", formatValue);
-          }
-        });
-      });
-    </script>
+    <script src="demo/prism.js"></script>
+    <script src="dest/inumber.min.js"></script>
+    <script src="demo/script.js"></script>
   </body>
 </html>

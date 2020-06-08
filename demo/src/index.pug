@@ -1,0 +1,99 @@
+doctype html
+html(lang="ru-RU")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv='X-UA-Compatible', content="IE=edge")
+    meta(name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE")
+    meta(name="format-detection" content="telephone=no")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+    meta(name="author" content="//vk.com/tishukn")
+
+    link(rel="stylesheet", href="demo/prism.css")
+
+    link(rel="stylesheet" type='text/css' href="demo/style.css")
+
+    meta(name="description" content="Simple and easy Input Spinner")
+
+    title INumber Demo
+
+  body
+    <!--[if lte IE 9]>
+    p.browsehappy Вы используете #[strong устаревший] браузер. Пожалуйста #[a(href="//browsehappy.com/", target="_blank") обновите ваш браузер] чтобы воспользоваться всем функционалом сайта.
+    <![endif]-->
+
+    .container
+
+      .header.text-center
+        .row
+          h1 INumber Demo
+          p Simple and easy Input Spinner
+
+        p
+          a(href="https://github.com/rainjeck/inumber") GitHub
+
+      .block.text-center
+        .row
+          #inumber
+            input(type="text")
+
+        .row
+          button.button#setValue(type="button") Set Value 2
+
+        .row
+          #inumber-float
+            input(type="text" step="0.1" value="1.2" min="0.1" max="1.5")
+
+      .block
+        .row
+          h3.title: strong Usage:
+          .title HTML:
+
+        .row
+          pre.language-markup: code.
+            #{"<div id='inumber'>"}
+              #{"<input type='number' />"}
+            #{"</div>"}
+
+      .block
+        p You can use attributes:
+
+        pre.language-markup: code.
+          #{"<div id='inumber'>"}
+            #{"<input type='text' min='1' max='10' step='1' value='2' />"}
+          #{"</div>"}
+
+          #{"<div id='inumber-float'>"}
+            #{"<input type='text' step='0.1' value='1.2' min='0.1' max='1.5' />"}
+          #{"</div>"}
+
+      .block
+        .title JavaScript:
+
+        pre.language-javascript: code.
+          var inumber = new INumber.default("#inumber", {
+            decreaseText: '-',
+            increaseText: '+',
+            float: false,
+            decimals: 0,
+            locale: '', // navigator.language as default or Intl
+            inputPosition: "between", <span>// between, left, right</span>
+            init: function(instance) { ... },
+            change: function(value, formatValue, el, id) { ... }
+          });
+
+          // Method:
+          inumber.setValue(2);
+
+      .block
+        .title CSS Classes and generating layout:
+
+        pre.language-markup: code.
+          #{"<div id='inumber' class='inumber'>"}
+            #{"<button type='button' class='inumber-button is-decrease'>-</button"}
+            #{"<input type='number' class='inumber-input' />"}
+            #{"<button type='button' class='inumber-button is-increase'>+</button>"}
+          #{"</div>"}
+
+    script(src="demo/prism.js")
+    script(src="dest/inumber.min.js")
+    script(src="demo/script.js")
