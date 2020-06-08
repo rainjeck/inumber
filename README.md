@@ -51,8 +51,8 @@ var inumberFloat = new INumber.default("#inumber-float", {
 ### Generating layout
 ```
 <div id="inumber" class="inumber">
-  <button type="button" class="inumber-button decrease">
+  <button type="button" class="inumber-button is-decrease">
   <input type="number" class="inumber-input"/>
-  <button type="button" class="inumber-button increase">
+  <button type="button" class="inumber-button is-increase">
 </div>
 ```
