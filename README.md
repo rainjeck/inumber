@@ -47,8 +47,11 @@ var inumberFloat = new INumber.default("#inumber-float", {
 
 ### Methods
 ```inumber.setValue(2);``` - set value
+
 ```inumber.setMin(10);``` - set min
+
 ```inumber.setMax(20);``` - set max
+
 ```inumber.setStep(2);``` - set step
 
 ### Generating layout
