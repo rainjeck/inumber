@@ -21,10 +21,8 @@ export default class INumber {
       el = document.querySelector(id);
     }
 
-    const input = el.querySelector("input");
-
     this.el = el;
-    this.input = input;
+    this.input = el.querySelector("input");
 
     this.locale = params.locale || navigator.language || "en-US";
 
@@ -37,21 +35,17 @@ export default class INumber {
 
     this.inputPosition = params.inputPosition || "between";
 
-    const min = input.getAttribute("min");
-    const max = input.getAttribute("max");
-    const step = input.getAttribute("step");
+    this.value = this.input.value || 0;
 
-    this.value = input.value || 0;
+    this.formatValue = parseInt(this.input.value) || 0;
 
-    this.formatValue = parseInt(input.value) || 0;
-
-    this.min = (min) ? Math.abs(min) : 0;
-    this.max = (max) ? Math.abs(max) : 0;
-    this.step = (step) ? Math.abs(step) : 1;
+    this.min = ( this.input.hasAttribute("min") ) ? Math.abs(this.input.min) : 0;
+    this.max = ( this.input.hasAttribute("max") ) ? Math.abs(this.input.max) : 0;
+    this.step = ( this.input.hasAttribute("step") ) ? Math.abs(this.input.step) : 1;
 
     if (this.float) {
 
-      this.value = parseFloat(input.value) || 0;
+      this.value = parseFloat(this.input.value) || 0;
       this.step = parseFloat(this.step);
       this.decimals = parseInt(params.decimals) || 1;
       this.formatValue = this.formatNumber(this.value) || 0;
@@ -91,7 +85,7 @@ export default class INumber {
       }
     }
 
-    input.onblur = (e) => {
+    this.input.onblur = (e) => {
       this.change(e);
 
       if (params && typeof params.change === "function") {
@@ -203,5 +197,31 @@ export default class INumber {
     value = value.replace(/[,*]/g, ".");
 
     this.setValue(value);
+  }
+
+  setMin( minValue ) {
+    this.min = Math.abs( minValue );
+
+    if ( this.value < this.min ) {
+      this.setValue( this.min );
+    }
+  }
+
+  setMax( maxValue ) {
+    this.max = Math.abs( maxValue );
+
+    if ( this.value > this.max ) {
+      this.setValue( this.max );
+    }
+  }
+
+  setStep( step ) {
+    this.step = Math.abs( step );
+
+    if (this.float) {
+      this.step = parseFloat(this.step);
+    } else {
+      this.step = Math.ceil(this.step);
+    }
   }
 }

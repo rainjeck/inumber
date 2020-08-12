@@ -55,26 +55,22 @@
         el = document.querySelector(id);
       }
 
-      var input = el.querySelector("input");
       this.el = el;
-      this.input = input;
+      this.input = el.querySelector("input");
       this.locale = params.locale || navigator.language || "en-US";
       this.decreaseText = params.decreaseText || '-';
       this.increaseText = params.increaseText || '+';
       this["float"] = params["float"] || false;
       this.className = 'inumber';
       this.inputPosition = params.inputPosition || "between";
-      var min = input.getAttribute("min");
-      var max = input.getAttribute("max");
-      var step = input.getAttribute("step");
-      this.value = input.value || 0;
-      this.formatValue = parseInt(input.value) || 0;
-      this.min = min ? Math.abs(min) : 0;
-      this.max = max ? Math.abs(max) : 0;
-      this.step = step ? Math.abs(step) : 1;
+      this.value = this.input.value || 0;
+      this.formatValue = parseInt(this.input.value) || 0;
+      this.min = this.input.hasAttribute("min") ? Math.abs(this.input.min) : 0;
+      this.max = this.input.hasAttribute("max") ? Math.abs(this.input.max) : 0;
+      this.step = this.input.hasAttribute("step") ? Math.abs(this.input.step) : 1;
 
       if (this["float"]) {
-        this.value = parseFloat(input.value) || 0;
+        this.value = parseFloat(this.input.value) || 0;
         this.step = parseFloat(this.step);
         this.decimals = parseInt(params.decimals) || 1;
         this.formatValue = this.formatNumber(this.value) || 0;
@@ -109,7 +105,7 @@
         }
       };
 
-      input.onblur = function (e) {
+      this.input.onblur = function (e) {
         _this.change(e);
 
         if (params && typeof params.change === "function") {
@@ -212,6 +208,35 @@
         value = value.replace(/[\s*]/g, "");
         value = value.replace(/[,*]/g, ".");
         this.setValue(value);
+      }
+    }, {
+      key: "setMin",
+      value: function setMin(minValue) {
+        this.min = Math.abs(minValue);
+
+        if (this.value < this.min) {
+          this.setValue(this.min);
+        }
+      }
+    }, {
+      key: "setMax",
+      value: function setMax(maxValue) {
+        this.max = Math.abs(maxValue);
+
+        if (this.value > this.max) {
+          this.setValue(this.max);
+        }
+      }
+    }, {
+      key: "setStep",
+      value: function setStep(step) {
+        this.step = Math.abs(step);
+
+        if (this["float"]) {
+          this.step = parseFloat(this.step);
+        } else {
+          this.step = Math.ceil(this.step);
+        }
       }
     }]);
 

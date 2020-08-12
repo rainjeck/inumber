@@ -22,7 +22,7 @@ body {
 .block {
   margin-bottom: 2em;
 }
-.row {
+.row:not(:last-child) {
   margin-bottom: 1em;
 }
 .button {
